@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>its my typing test website  </title>
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap" rel="stylesheet">
+	<style>
+		{
+			font-family: 'Josefin Sans', sans-serif;
+		}
+		
+		textarea
+		{
+			background-color: #444;
+			justify-content: center;
+			margin: auto;
+			border-radius: 20px solid red; 
+			text-align: center;
+			color: white;
+		}
+
+		.mydiv
+		{ 
+			width: 100%;
+			height: 100vh;
+			position: relative;
+			background: #3498db;
+
+		}
+		.maindiv
+		{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          text-align: center;
+		}
+
+
+		.mybtn
+		{
+			padding: 10px 20px;
+			border-radius: 20px;
+			border:5px solid blue;
+			background: yellow;
+			font-size: 1rem;
+
+		}
+
+
+	</style>
+</head>
+<body>
+<div class="mydiv">
+	<div class="maindiv">
+		<h1 id="main">Welcome to typing speed</h1>
+		<h2 id="ram"></h2>
+		
+
+		<textarea id="area" class="mainarea" placeholder="remenber be nice!" cols="100" rows="10"></textarea>
+		<br>
+		<button id="btn" class="mybtn">Start</button>
+		<br><br>
+		<p>your speed is here pes second</p>
+<p id="ans"></p>
+	</div>
+
+</div>
+<script>
+	
+	const setofwords = ["roshan pandey blog","hlo dosto i want to become a full stack developer","baba also want to get this"];
+
+	const ram = document.getElementById('ram');
+	const area = document.getElementById('area');
+	const btn = document.getElementById('btn');
+	let startTime,endTime;
+
+	playGame = ()=>
+	{
+		let random = Math.floor(Math.random()*setofwords.length);
+		ram.innerText = setofwords[random];
+		let date = new Date();
+		startTime = date.getTime();
+		btn.innerText = "Done";
+	}
+	const endPlay = ()=>
+	{
+			let date = new Date();
+		endTime = date.getTime();
+		let totalTime = ((endTime - startTime)/1000);
+		let totalStr = area.value;
+		let totalWords = wordCounter(totalStr);
+		
+		let ans = Math.round((totalWords/totalTime)*60);
+		ram.innerText = ans;
+		area.innerText = " ";
+
+	}
+
+	const wordCounter = (str)=>
+	{
+		let response = str.split(" ").length;
+		return response;
+	}
+	btn.addEventListener('click',function()
+	{
+		if(this.innerText =='Start')
+		{
+			area.disabled = false;
+			playGame();
+
+
+		}
+		else if(this.innerText=="Done")
+		{
+			area.disabled =true;
+            btn.innerText = "Start";
+            endPlay();
+
+
+		}
+	})
+
+</script>
+</body>
+</html>
